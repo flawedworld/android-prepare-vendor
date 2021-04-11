@@ -729,7 +729,12 @@ case $BYTECODE_REPAIR_METHOD in
     ;;
 esac
 
-FORCE_PREOPT=false
+if [[ ( "$DEVICE" == "redfin" || "$DEVICE" == "bramble" ) ]]; then
+  echo "[*] Device supports FORCE_PREOPT!"
+else
+  echo "[!] Device does NOT support FORCE_PREOPT!"
+  FORCE_PREOPT=false
+fi
 
 # If deodex all not set provide a list of packages to repair
 if [ $DEODEX_ALL = false ]; then
